@@ -20,6 +20,27 @@ const ROBOTS = STAGING ? "noindex, nofollow" : "index, follow";
 const PHONE_SVG =
   '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>';
 
+// Jeu d'icônes métier sur-mesure (line icons 24×24, couleur héritée via currentColor).
+const ICONS = {
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  drop: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  waves: '<path d="M2 6c.6.5 1.4 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 1.1 0 1.9-.5 2.5-1"/><path d="M2 12c.6.5 1.4 1 2.5 1C7 13 7 11 9.5 11c2.6 0 2.4 2 5 2 1.1 0 1.9-.5 2.5-1"/><path d="M2 18c.6.5 1.4 1 2.5 1C7 19 7 17 9.5 17c2.6 0 2.4 2 5 2 1.1 0 1.9-.5 2.5-1"/>',
+  bath: '<path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M5 12V7a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M17 19l1 2"/>',
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  snow: '<path d="M12 3v18M5.2 7.5l13.6 9M18.8 7.5l-13.6 9"/><path d="M12 6l2.3-1.3M12 6 9.7 4.7M12 18l2.3 1.3M12 18l-2.3 1.3M5.4 10.4l-.2-2.6 2.6.2M18.6 10.4l.2-2.6-2.6.2M5.4 13.6l-.2 2.6 2.6-.2M18.6 13.6l.2 2.6-2.6-.2"/>',
+  bolt: '<path d="M13 2 3 14h7l-1 8 10-12h-7z"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/>',
+  doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  shield: '<path d="M12 2 4 5v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V5z"/><path d="m9 12 2 2 4-4"/>',
+  pin: '<path d="M12 21s7-6.4 7-12a7 7 0 0 0-14 0c0 5.6 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  phone: '<path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/>',
+};
+const icon = (name) =>
+  '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  (ICONS[name] || ICONS.wrench) +
+  "</svg>";
+
 const NAV = [
   ["Accueil", "index.html"],
   ["Services", "services.html"],
@@ -261,18 +282,18 @@ const page = (file, { title, desc, jsonld = [], active, body }) =>
 
 /* ---- Services (réutilisé Accueil + Services) ---- */
 const SERVICES = [
-  ["🚿", "Dépannage en urgence", "Fuite d'eau, rupture de canalisation, dégât des eaux. On stoppe le problème et on répare durablement, 7j/7.", ["Fuite d'eau et dégât des eaux", "Canalisation percée ou gelée", "Robinet, chasse d'eau, siphon"]],
-  ["💧", "Recherche de fuite", "Détection précise et non destructive pour localiser l'origine d'une fuite sans casse inutile.", ["Caméra d'inspection", "Gaz traceur et détection acoustique", "Localisation avant réparation"]],
-  ["🌀", "Débouchage de canalisation", "Évier, WC, douche, colonne : débouchage mécanique et hydrocurage des canalisations bouchées.", ["Furet et débouchage mécanique", "Hydrocurage haute pression", "Évacuations et colonnes"]],
-  ["🛁", "Sanitaire & salle de bain", "Installation et remplacement de WC, lavabo, douche, robinetterie, chauffe-eau et ballon.", ["WC, lavabo, douche, baignoire", "Robinetterie et mitigeurs", "Chauffe-eau et ballon"]],
-  ["🔥", "Chauffage", "Installation, entretien et dépannage de radiateurs, chaudières et planchers chauffants.", ["Radiateurs et chaudières", "Plancher chauffant", "Entretien et dépannage"]],
-  ["❄️", "Climatisation", "Pose et maintenance de climatiseurs pour un confort toute l'année, été comme hiver.", ["Pose de climatiseurs", "Entretien et recharge", "Confort été comme hiver"]],
+  ["wrench", "Dépannage en urgence", "Fuite d'eau, rupture de canalisation, dégât des eaux. On stoppe le problème et on répare durablement, 7j/7.", ["Fuite d'eau et dégât des eaux", "Canalisation percée ou gelée", "Robinet, chasse d'eau, siphon"]],
+  ["drop", "Recherche de fuite", "Détection précise et non destructive pour localiser l'origine d'une fuite sans casse inutile.", ["Caméra d'inspection", "Gaz traceur et détection acoustique", "Localisation avant réparation"]],
+  ["waves", "Débouchage de canalisation", "Évier, WC, douche, colonne : débouchage mécanique et hydrocurage des canalisations bouchées.", ["Furet et débouchage mécanique", "Hydrocurage haute pression", "Évacuations et colonnes"]],
+  ["bath", "Sanitaire & salle de bain", "Installation et remplacement de WC, lavabo, douche, robinetterie, chauffe-eau et ballon.", ["WC, lavabo, douche, baignoire", "Robinetterie et mitigeurs", "Chauffe-eau et ballon"]],
+  ["flame", "Chauffage", "Installation, entretien et dépannage de radiateurs, chaudières et planchers chauffants.", ["Radiateurs et chaudières", "Plancher chauffant", "Entretien et dépannage"]],
+  ["snow", "Climatisation", "Pose et maintenance de climatiseurs pour un confort toute l'année, été comme hiver.", ["Pose de climatiseurs", "Entretien et recharge", "Confort été comme hiver"]],
 ];
 
 const servicesCards = SERVICES.map(
   ([ico, t, p]) => `
           <article class="card">
-            <div class="card-ico" aria-hidden="true">${ico}</div>
+            <div class="card-ico">${icon(ico)}</div>
             <h3>${t}</h3>
             <p>${p}</p>
           </article>`
@@ -280,10 +301,10 @@ const servicesCards = SERVICES.map(
 
 const engagements = `
         <div class="cards">
-          <article class="card"><div class="card-ico" aria-hidden="true">📋</div><h3>Devis gratuit, sans engagement</h3><p>Le prix est annoncé et validé avec vous avant toute intervention. Aucune surprise sur la facture.</p></article>
-          <article class="card"><div class="card-ico" aria-hidden="true">⚡</div><h3>Intervention rapide</h3><p>Fuite, dégât des eaux, panne de chauffage : les urgences sont traitées en priorité, 7j/7.</p></article>
-          <article class="card"><div class="card-ico" aria-hidden="true">🛠️</div><h3>Travail garanti</h3><p>Des réparations soignées et durables, réalisées dans les règles de l'art.</p></article>
-          <article class="card"><div class="card-ico" aria-hidden="true">📍</div><h3>Artisan local déclaré</h3><p>Entreprise immatriculée (SIRET 793 539 404 00020), basée dans la Somme, proche de chez vous.</p></article>
+          <article class="card"><div class="card-ico">${icon("doc")}</div><h3>Devis gratuit, sans engagement</h3><p>Le prix est annoncé et validé avec vous avant toute intervention. Aucune surprise sur la facture.</p></article>
+          <article class="card"><div class="card-ico">${icon("bolt")}</div><h3>Intervention rapide</h3><p>Fuite, dégât des eaux, panne de chauffage : les urgences sont traitées en priorité, 7j/7.</p></article>
+          <article class="card"><div class="card-ico">${icon("shield")}</div><h3>Travail garanti</h3><p>Des réparations soignées et durables, réalisées dans les règles de l'art.</p></article>
+          <article class="card"><div class="card-ico">${icon("pin")}</div><h3>Artisan local déclaré</h3><p>Entreprise immatriculée (SIRET 793 539 404 00020), basée dans la Somme, proche de chez vous.</p></article>
         </div>`;
 
 const ZONES = ["Amiens","Abbeville","Albert","Doullens","Corbie","Péronne","Montdidier","Roye","Ham","Rue","Friville-Escarbotin","Flixecourt","Ailly-sur-Somme","Camon","Longueau","… et alentours"];
@@ -305,7 +326,7 @@ page("index.html", {
             <a href="${TEL_HREF}" class="btn btn-accent btn-lg">${PHONE_SVG} Appeler maintenant</a>
             <a href="contact.html" class="btn btn-outline btn-lg">Demander un devis gratuit</a>
           </div>
-          <ul class="hero-points"><li>✔ Intervention rapide</li><li>✔ Devis gratuit</li><li>✔ Artisan local</li></ul>
+          <ul class="hero-points"><li>Intervention rapide</li><li>Devis gratuit</li><li>Artisan local</li></ul>
         </div>
         <figure class="hero-media">
           <img src="assets/hero-plombier.jpg" alt="Réseau de tuyauterie d'eau et de gaz installé par un plombier chauffagiste" width="900" height="1030" loading="eager" fetchpriority="high" />
@@ -315,10 +336,10 @@ page("index.html", {
 
     <section class="trustbar" aria-label="Nos garanties">
       <div class="container trust-grid">
-        <div class="trust-item"><span class="trust-ico" aria-hidden="true">⏱️</span><div><strong>Intervention rapide</strong><span>Urgences traitées en priorité</span></div></div>
-        <div class="trust-item"><span class="trust-ico" aria-hidden="true">📅</span><div><strong>7j/7</strong><span>Soirs &amp; week-ends inclus</span></div></div>
-        <div class="trust-item"><span class="trust-ico" aria-hidden="true">📝</span><div><strong>Devis gratuit</strong><span>Prix annoncé avant travaux</span></div></div>
-        <div class="trust-item"><span class="trust-ico" aria-hidden="true">🛡️</span><div><strong>Travail garanti</strong><span>Pièces &amp; main d'œuvre</span></div></div>
+        <div class="trust-item"><span class="trust-ico">${icon("bolt")}</span><div><strong>Intervention rapide</strong><span>Urgences traitées en priorité</span></div></div>
+        <div class="trust-item"><span class="trust-ico">${icon("calendar")}</span><div><strong>7j/7</strong><span>Soirs &amp; week-ends inclus</span></div></div>
+        <div class="trust-item"><span class="trust-ico">${icon("doc")}</span><div><strong>Devis gratuit</strong><span>Prix annoncé avant travaux</span></div></div>
+        <div class="trust-item"><span class="trust-ico">${icon("shield")}</span><div><strong>Travail garanti</strong><span>Pièces &amp; main d'œuvre</span></div></div>
       </div>
     </section>
 
@@ -385,7 +406,7 @@ page("services.html", {
     <section class="section">
       <div class="container narrow">
         <div class="svc-list">
-          ${SERVICES.map(([ico, t, p, items]) => `<article class="svc"><div class="card-ico" aria-hidden="true">${ico}</div><div><h3>${t}</h3><p>${p}</p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div></article>`).join("\n          ")}
+          ${SERVICES.map(([ico, t, p, items]) => `<article class="svc"><div class="card-ico">${icon(ico)}</div><div><h3>${t}</h3><p>${p}</p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div></article>`).join("\n          ")}
         </div>
       </div>
     </section>
@@ -491,9 +512,9 @@ page("contact.html", {
         <div class="contact-info">
           <h2>Joindre votre plombier</h2>
           <ul class="contact-list">
-            <li><span class="ci-ico" aria-hidden="true">📞</span><div><span class="ci-lbl">Téléphone</span><a href="${TEL_HREF}" class="ci-val">${TEL_DISPLAY}</a></div></li>
-            <li><span class="ci-ico" aria-hidden="true">📍</span><div><span class="ci-lbl">Secteur</span><span class="ci-val">Amiens &amp; toute la Somme (80)</span></div></li>
-            <li><span class="ci-ico" aria-hidden="true">🕒</span><div><span class="ci-lbl">Horaires</span><span class="ci-val">7j/7 — urgences soirs &amp; week-ends</span></div></li>
+            <li><span class="ci-ico">${icon("phone")}</span><div><span class="ci-lbl">Téléphone</span><a href="${TEL_HREF}" class="ci-val">${TEL_DISPLAY}</a></div></li>
+            <li><span class="ci-ico">${icon("pin")}</span><div><span class="ci-lbl">Secteur</span><span class="ci-val">Amiens &amp; toute la Somme (80)</span></div></li>
+            <li><span class="ci-ico">${icon("clock")}</span><div><span class="ci-lbl">Horaires</span><span class="ci-val">7j/7 — urgences soirs &amp; week-ends</span></div></li>
           </ul>
           <a href="${TEL_HREF}" class="btn btn-accent btn-lg">${PHONE_SVG} Appeler le plombier</a>
         </div>
