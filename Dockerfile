@@ -11,5 +11,5 @@ COPY . /usr/share/nginx/html
 RUN rm -f /usr/share/nginx/html/nginx.conf
 
 EXPOSE 80
-HEALTHCHECK --interval=30s --timeout=4s --retries=3 \
-  CMD wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1
+# Pas de HEALTHCHECK baké : pour un site 100% statique, nginx running = sain.
+# (Coolify peut configurer un healthcheck HTTP côté UI si souhaité.)
