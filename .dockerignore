@@ -1,0 +1,8 @@
+.git
+.gitignore
+build.mjs
+Dockerfile
+nginx.conf
+.dockerignore
+README.md
+DEPLOY.md
