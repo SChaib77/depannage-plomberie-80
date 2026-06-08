@@ -391,6 +391,21 @@ page("index.html", {
         <div class="stat"><span class="stat-num">80</span><span class="stat-lbl">Tout le département</span></div>
       </div>
     </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker">En images</p>
+          <h2>Plomberie, sanitaire &amp; chauffage</h2>
+          <p class="section-sub">Du dépannage rapide à l'installation soignée, pour les particuliers et les professionnels.</p>
+        </header>
+        <div class="gallery">
+          <figure class="gallery-item"><img src="assets/sanitaire.jpg" alt="Salle de bain moderne avec lavabo, baignoire et robinetterie" width="800" height="600" loading="lazy" /><figcaption>Sanitaire &amp; salle de bain</figcaption></figure>
+          <figure class="gallery-item"><img src="assets/chauffage.jpg" alt="Radiateur de chauffage avec robinet thermostatique" width="800" height="600" loading="lazy" /><figcaption>Chauffage</figcaption></figure>
+          <figure class="gallery-item"><img src="assets/atouts-plombier.jpg" alt="Artisan en intervention équipé de gants de protection" width="900" height="810" loading="lazy" /><figcaption>Dépannage &amp; intervention</figcaption></figure>
+        </div>
+      </div>
+    </section>
 ${ctaBand("Une urgence plomberie&nbsp;? Ne laissez pas la situation empirer", "Appelez votre artisan plombier à Amiens et dans la Somme. Diagnostic clair et devis gratuit avant toute intervention.")}`,
 });
 
