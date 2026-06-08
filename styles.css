@@ -235,10 +235,14 @@ p{margin:0 0 1rem}
 .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 
 /* ---------- Service detail rows ---------- */
-.svc-list{display:grid;gap:18px}
-.svc{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
-.svc:hover{border-color:#cfe6f5;box-shadow:var(--shadow)}
-.svc .card-ico{margin:0}
+.svc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.svc{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:.2s}
+.svc:hover{border-color:#cfe6f5;box-shadow:var(--shadow);transform:translateY(-4px)}
+.svc-media{margin:0;overflow:hidden;line-height:0}
+.svc-media img{width:100%;height:200px;object-fit:cover;transition:transform .35s ease}
+.svc:hover .svc-media img{transform:scale(1.05)}
+.svc-body{padding:0 24px 26px}
+.svc-body .card-ico{margin:-52px 0 14px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);position:relative;z-index:1}
 .svc h3{margin:.1rem 0 .4rem}
 .svc p{color:var(--muted);margin:0 0 .5rem}
 .svc ul{margin:.2rem 0 0;padding-left:1.1rem;color:var(--muted)}
@@ -283,7 +287,7 @@ p{margin:0 0 1rem}
   .nav-menu a{padding:14px 22px;border-radius:0}
   .trust-grid{grid-template-columns:1fr 1fr;gap:16px}
   .steps,.stats-grid{grid-template-columns:1fr 1fr}
-  .cards,.reviews,.gallery{grid-template-columns:1fr}
+  .cards,.reviews,.gallery,.svc-list{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;gap:8px}
   .fab-call{display:grid}

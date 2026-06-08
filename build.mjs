@@ -282,12 +282,12 @@ const page = (file, { title, desc, jsonld = [], active, body }) =>
 
 /* ---- Services (réutilisé Accueil + Services) ---- */
 const SERVICES = [
-  ["wrench", "Dépannage en urgence", "Fuite d'eau, rupture de canalisation, dégât des eaux. On stoppe le problème et on répare durablement, 7j/7.", ["Fuite d'eau et dégât des eaux", "Canalisation percée ou gelée", "Robinet, chasse d'eau, siphon"]],
-  ["drop", "Recherche de fuite", "Détection précise et non destructive pour localiser l'origine d'une fuite sans casse inutile.", ["Caméra d'inspection", "Gaz traceur et détection acoustique", "Localisation avant réparation"]],
-  ["waves", "Débouchage de canalisation", "Évier, WC, douche, colonne : débouchage mécanique et hydrocurage des canalisations bouchées.", ["Furet et débouchage mécanique", "Hydrocurage haute pression", "Évacuations et colonnes"]],
-  ["bath", "Sanitaire & salle de bain", "Installation et remplacement de WC, lavabo, douche, robinetterie, chauffe-eau et ballon.", ["WC, lavabo, douche, baignoire", "Robinetterie et mitigeurs", "Chauffe-eau et ballon"]],
-  ["flame", "Chauffage", "Installation, entretien et dépannage de radiateurs, chaudières et planchers chauffants.", ["Radiateurs et chaudières", "Plancher chauffant", "Entretien et dépannage"]],
-  ["snow", "Climatisation", "Pose et maintenance de climatiseurs pour un confort toute l'année, été comme hiver.", ["Pose de climatiseurs", "Entretien et recharge", "Confort été comme hiver"]],
+  ["wrench", "Dépannage en urgence", "Fuite d'eau, rupture de canalisation, dégât des eaux. On stoppe le problème et on répare durablement, 7j/7.", ["Fuite d'eau et dégât des eaux", "Canalisation percée ou gelée", "Robinet, chasse d'eau, siphon"], "assets/atouts-plombier.jpg", "Artisan en intervention de dépannage"],
+  ["drop", "Recherche de fuite", "Détection précise et non destructive pour localiser l'origine d'une fuite sans casse inutile.", ["Caméra d'inspection", "Gaz traceur et détection acoustique", "Localisation avant réparation"], "assets/svc-fuite.jpg", "Canalisation qui fuit avec écoulement d'eau"],
+  ["waves", "Débouchage de canalisation", "Évier, WC, douche, colonne : débouchage mécanique et hydrocurage des canalisations bouchées.", ["Furet et débouchage mécanique", "Hydrocurage haute pression", "Évacuations et colonnes"], "assets/svc-debouchage.jpg", "Lavabo et robinetterie"],
+  ["bath", "Sanitaire & salle de bain", "Installation et remplacement de WC, lavabo, douche, robinetterie, chauffe-eau et ballon.", ["WC, lavabo, douche, baignoire", "Robinetterie et mitigeurs", "Chauffe-eau et ballon"], "assets/sanitaire.jpg", "Salle de bain moderne avec lavabo et baignoire"],
+  ["flame", "Chauffage", "Installation, entretien et dépannage de radiateurs, chaudières et planchers chauffants.", ["Radiateurs et chaudières", "Plancher chauffant", "Entretien et dépannage"], "assets/chauffage.jpg", "Radiateur de chauffage avec robinet thermostatique"],
+  ["snow", "Climatisation", "Pose et maintenance de climatiseurs pour un confort toute l'année, été comme hiver.", ["Pose de climatiseurs", "Entretien et recharge", "Confort été comme hiver"], "assets/svc-clim.jpg", "Climatiseur mural intérieur"],
 ];
 
 const servicesCards = SERVICES.map(
@@ -421,7 +421,7 @@ page("services.html", {
     <section class="section">
       <div class="container narrow">
         <div class="svc-list">
-          ${SERVICES.map(([ico, t, p, items]) => `<article class="svc"><div class="card-ico">${icon(ico)}</div><div><h3>${t}</h3><p>${p}</p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div></article>`).join("\n          ")}
+          ${SERVICES.map(([ico, t, p, items, img, alt]) => `<article class="svc"><figure class="svc-media"><img src="${img}" alt="${alt}" width="700" height="470" loading="lazy" /></figure><div class="svc-body"><div class="card-ico">${icon(ico)}</div><h3>${t}</h3><p>${p}</p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div></article>`).join("\n          ")}
         </div>
       </div>
     </section>
