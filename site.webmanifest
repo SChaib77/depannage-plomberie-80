@@ -1,0 +1,13 @@
+{
+  "name": "Dépannage Plomberie 80",
+  "short_name": "Plomberie 80",
+  "description": "Plombier en urgence à Amiens et dans la Somme — dépannage 7j/7, recherche de fuite, débouchage, chauffage.",
+  "lang": "fr-FR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a3d62",
+  "icons": [
+    { "src": "assets/logo-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

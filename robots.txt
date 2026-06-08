@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.depannage-plomberie-80.fr/sitemap.xml
