@@ -22,29 +22,38 @@ assets/
   logo-mark.svg     Logo icône seule
 ```
 
-## ⚠️ À CONFIRMER avant mise en production (placeholders)
+## Données réelles (registre public INSEE/INPI)
 
-Ces valeurs sont des **placeholders** : impossible de les récupérer depuis la
-fiche PagesJaunes (page protégée). À remplacer partout (`index.html` + JSON-LD) :
+Identité de l'annonceur vérifiée et intégrée (`index.html` + JSON-LD + `mentions-legales.html`) :
 
-| Donnée            | Placeholder actuel                      |
+| Donnée            | Valeur                                  |
 | ----------------- | --------------------------------------- |
-| Téléphone         | `03 22 00 00 00` / `tel:+33322000000`   |
-| E-mail            | `contact@depannage-plomberie-80.fr`     |
-| Adresse / SIRET   | « À compléter » dans le JSON-LD         |
-| Nom de domaine    | `www.depannage-plomberie-80.fr`         |
-| Avis clients      | section « Avis » = exemples à remplacer par de vrais avis Google/PagesJaunes |
-| Horaires exacts   | actuellement « 7j/7 » (à ajuster)       |
+| Exploitant        | Imad Hemani (entreprise individuelle)   |
+| Nom commercial    | Dépannage Plomberie 80                  |
+| Téléphone         | `06 19 72 90 80` / `tel:+33619729080` ✅ |
+| SIRET / SIREN     | `79353940400020` / `793 539 404` ✅      |
+| APE / NAF         | `43.22A` ✅                              |
+| Siège             | 4 rue Stendhal, 80080 Amiens (en mentions légales uniquement — non affiché publiquement) ✅ |
 
-Recherche/remplacement rapide : chercher `+33322000000`, `03 22 00 00 00`,
-`depannage-plomberie-80.fr`.
+## ⚠️ Reste à confirmer (données détenues par le gérant)
+
+| Donnée            | État                                     |
+| ----------------- | --------------------------------------- |
+| E-mail            | placeholder `contact@depannage-plomberie-80.fr` (à remplacer) |
+| Nom de domaine    | placeholder `www.depannage-plomberie-80.fr` (canonical/OG/sitemap) |
+| Hébergeur         | « À compléter » dans `mentions-legales.html` (dépend de l'hébergement) |
+| Médiateur conso   | « À compléter » dans `mentions-legales.html` (obligatoire) |
+| Statut TVA        | « À compléter » (mention art. 293 B si micro) |
+| Avis clients      | CTA Google à connecter (`data-review-link`) — aucun avis inventé |
+| Horaires exacts   | actuellement « 7j/7 » (à ajuster)       |
+| 2e numéro         | `07 44 41 59 53` trouvé, non affiché (à intégrer si souhaité) |
 
 ## Photos
 
-Photos libres via le CDN Unsplash (licence gratuite, hotlink autorisé). Pour la
-prod, il est recommandé de les **télécharger** dans `assets/` et de les servir
-en local (perf + indépendance). Pensez aussi à générer `assets/og-cover.jpg`
-(1200×630) pour le partage sur les réseaux sociaux.
+Photos libres téléchargées en local dans `assets/` (licence Unsplash, usage
+commercial gratuit sans attribution) : `hero-plombier.jpg` (réseau eau/gaz),
+`atouts-plombier.jpg` (artisan en intervention), `og-cover.jpg` (1200×630, partage social).
+Aucune dépendance CDN externe.
 
 ## SEO intégré
 
