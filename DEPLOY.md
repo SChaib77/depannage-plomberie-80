@@ -4,24 +4,33 @@ Le site est un conteneur **nginx autonome** (`Dockerfile` + `nginx.conf`). Il se
 déploie comme **application Coolify indépendante** — **jamais** via le dépôt ou la
 branche d'un autre projet.
 
-## Prérequis (à fournir)
+## Mode retenu : upload direct + création dans l'UI Coolify
 
-1. **Source git accessible par Coolify** : ce dossier poussé sur un dépôt
-   (GitHub/GitLab) que l'instance Coolify peut lire. Le dépôt local n'a pas
-   encore de remote.
-2. **Accès Coolify** : soit la création manuelle dans l'UI, soit un token API +
-   l'UUID du serveur/projet cible.
-3. **Domaine temporaire** : sous-domaine à attribuer (ex. `plomberie80.<domaine-coolify>`)
-   ou domaine auto-généré par Coolify.
+Paquet à uploader : **`plomberie80-site.zip`** (généré à la racine — régénérable
+via `tar -a -c -f plomberie80-site.zip --exclude=.git .`). Il contient tous les
+fichiers statiques + `Dockerfile` + `nginx.conf` (le `.dockerignore` exclut les
+fichiers de dev de l'image finale).
 
-## Procédure Coolify (UI — ~5 étapes)
+À préparer côté Coolify :
 
-1. **New Resource → Application**.
-2. Source = le dépôt git (branche `master`).
-3. Build Pack = **Dockerfile** (détecté automatiquement).
+- **Domaine temporaire** : sous-domaine à attribuer (ex. `plomberie80.<domaine-coolify>`)
+  ou domaine auto-généré par Coolify.
+
+## Procédure Coolify (UI)
+
+1. **New Resource → Application** (sur le projet/serveur de votre choix —
+   app **indépendante**, ne pas la rattacher au projet ActioFin).
+2. **Source** : upload direct du contenu de `plomberie80-site.zip` comme
+   contexte de build (ou extraire le zip dans le dossier source que Coolify
+   utilise).
+3. **Build Pack = Dockerfile** (le `Dockerfile` à la racine est détecté).
 4. **Domains** : renseigner le domaine temporaire, laisser Coolify émettre le
    certificat Let's Encrypt.
-5. **Deploy**. Healthcheck `GET /` intégré au conteneur.
+5. **Deploy**. Healthcheck `GET /` intégré au conteneur (port 80).
+
+> Si votre version de Coolify ne propose pas d'upload de contexte sans git, la
+> voie de repli la plus simple reste un petit dépôt git privé pointé par Coolify
+> (même contenu). Le reste de la procédure est identique.
 
 ## Vérification post-déploiement
 
