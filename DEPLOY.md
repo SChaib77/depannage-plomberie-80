@@ -11,13 +11,19 @@ via `tar -a -c -f plomberie80-site.zip --exclude=.git .`). Il contient tous les
 fichiers statiques + `Dockerfile` + `nginx.conf` (le `.dockerignore` exclut les
 fichiers de dev de l'image finale).
 
-À préparer côté Coolify :
+Hébergement cible : **VPS IONOS** `217.160.172.197` (Ubuntu 24.04, Docker/Coolify
+installé) — distinct du serveur ActioFin OVH.
 
-- **Sous-domaine de test sur actiofin.com** (non indexé) : ex.
-  `plomberie80.actiofin.com`. Si un wildcard `*.actiofin.com` pointe déjà vers le
-  serveur Coolify, aucun enregistrement DNS supplémentaire n'est nécessaire — il
-  suffit de renseigner le domaine dans Coolify. Sinon, créer un enregistrement
-  DNS (A/CNAME) pour ce sous-domaine vers le serveur Coolify.
+À préparer :
+
+- **DNS** — pas de wildcard `*.actiofin.com` (vérifié) → créer sur la zone
+  `actiofin.com` un enregistrement pour le sous-domaine de test :
+
+  ```
+  plomberie80   A   217.160.172.197   (TTL 300)
+  ```
+
+  (IP du VPS IONOS qui héberge Coolify.)
 
 > **Non-indexation garantie** : le build est généré en mode `STAGING` (drapeau
 > dans `build.mjs`) → chaque page porte `<meta name="robots" content="noindex,
@@ -57,3 +63,25 @@ docker build -t plomberie80 . && docker run --rm -p 8080:80 plomberie80
 ```
 
 Ou sans Docker : `npx serve .` (ou `python -m http.server 8080`).
+
+## Alternative : Docker brut sur le VPS (sans passer par l'UI Coolify)
+
+À exécuter **sur le VPS**, dans le dossier du site dézippé. ⚠️ Si Coolify gère
+déjà les ports 80/443 via Traefik, **ne pas** binder le port 80 directement —
+préférer le déploiement par l'UI Coolify (qui route le sous-domaine + TLS), ou
+exposer un port libre derrière le proxy.
+
+```bash
+# 1. Copier puis dézipper le paquet sur le VPS
+scp plomberie80-site.zip root@217.160.172.197:/root/
+ssh root@217.160.172.197
+mkdir -p plomberie80 && cd plomberie80 && unzip -o /root/plomberie80-site.zip
+
+# 2. Build + run (port hôte 8081 pour ne pas heurter Coolify/Traefik)
+docker build -t plomberie80 .
+docker rm -f plomberie80 2>/dev/null || true
+docker run -d --name plomberie80 --restart unless-stopped -p 8081:80 plomberie80
+```
+
+Puis faire pointer `plomberie80.actiofin.com` vers ce conteneur via le reverse
+proxy en place (Traefik/Coolify) avec émission du certificat TLS.
