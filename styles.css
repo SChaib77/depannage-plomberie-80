@@ -200,6 +200,8 @@ p{margin:0 0 1rem}
   font:inherit;color:var(--ink);background:#fbfdff;transition:.15s}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue-500);background:#fff;box-shadow:0 0 0 4px rgba(30,136,229,.12)}
 .form-note{font-size:.85rem;color:var(--muted);margin:.9rem 0 0;text-align:center}
+.form-note a{color:var(--blue-700);font-weight:600}
+.form-status{font-size:.9rem;color:var(--blue-700);margin:.7rem 0 0;text-align:center;min-height:1px}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--blue-900);color:#cfe0ee;padding:56px 0 26px}
@@ -248,6 +250,8 @@ p{margin:0 0 1rem}
 .svc ul{margin:.2rem 0 0;padding-left:1.1rem;color:var(--muted)}
 
 /* ---------- Urgence callout ---------- */
+.lead-media{margin:0 0 1.6rem}
+.lead-media img{width:100%;height:300px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
 .callout{background:#fff5ee;border:1px solid #ffd8bd;border-left:4px solid var(--orange);border-radius:var(--radius-sm);padding:18px 20px;margin:0 0 1.4rem}
 .callout strong{color:var(--orange-dark)}
 
@@ -293,6 +297,11 @@ p{margin:0 0 1rem}
   .fab-call{display:grid}
   .section{padding:54px 0}
 }
+/* ---------- Apparition au scroll ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
 }

@@ -8,8 +8,9 @@ import { writeFileSync } from "node:fs";
 
 const SITE = "Dépannage Plomberie 80";
 const DOMAIN = "https://www.depannage-plomberie-80.fr";
-const TEL_DISPLAY = "06 19 72 90 80";
-const TEL_HREF = "tel:+33619729080";
+const TEL_DISPLAY = "06 32 54 11 38";
+const TEL_HREF = "tel:+33632541138";
+const EMAIL = "depannageplomberie80@gmail.com";
 const YEAR = "2026";
 // STAGING=true → site hébergé sur un sous-domaine de test (ex. *.actiofin.com) :
 // NON indexé (meta noindex + robots Disallow). Passer à false pour la mise en prod
@@ -35,6 +36,7 @@ const ICONS = {
   pin: '<path d="M12 21s7-6.4 7-12a7 7 0 0 0-14 0c0 5.6 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   phone: '<path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
 };
 const icon = (name) =>
   '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -58,7 +60,8 @@ const PLUMBER = {
   legalName: "Imad Hemani",
   image: DOMAIN + "/assets/og-cover.jpg",
   url: DOMAIN + "/",
-  telephone: "+33-6-19-72-90-80",
+  telephone: "+33-6-32-54-11-38",
+  email: "depannageplomberie80@gmail.com",
   priceRange: "€€",
   identifier: { "@type": "PropertyValue", propertyID: "SIRET", value: "79353940400020" },
   description:
@@ -219,6 +222,7 @@ function footer() {
         <h3>Contact</h3>
         <ul>
           <li><a href="${TEL_HREF}">${TEL_DISPLAY}</a></li>
+          <li><a href="mailto:${EMAIL}">${EMAIL}</a></li>
           <li><a href="contact.html">Demander un devis</a></li>
           <li>7j/7 · Amiens &amp; Somme</li>
         </ul>
@@ -329,7 +333,7 @@ page("index.html", {
           <ul class="hero-points"><li>Intervention rapide</li><li>Devis gratuit</li><li>Artisan local</li></ul>
         </div>
         <figure class="hero-media">
-          <img src="assets/hero-plombier.jpg" alt="Réseau de tuyauterie d'eau et de gaz installé par un plombier chauffagiste" width="900" height="1030" loading="eager" fetchpriority="high" />
+          <img src="assets/hero-plombier-2.jpg" alt="Plombier serrant des raccords lors d'une intervention de plomberie" width="900" height="1030" loading="eager" fetchpriority="high" />
         </figure>
       </div>
     </section>
@@ -379,14 +383,14 @@ page("index.html", {
       <div class="container">
         <header class="section-head"><p class="kicker">Nos engagements</p><h2>Pourquoi nous confier votre dépannage</h2></header>
         ${engagements}
-        <p class="reviews-cta">Déjà dépanné par nos soins&nbsp;? <a href="#" data-review-link>Laissez un avis</a> pour aider d'autres habitants de la Somme.</p>
+        <p class="reviews-cta">Déjà dépanné par nos soins&nbsp;? <a href="mailto:${EMAIL}?subject=Mon%20avis%20%E2%80%93%20D%C3%A9pannage%20Plomberie%2080">Partagez votre avis</a> — votre retour aide d'autres habitants de la Somme.</p>
       </div>
     </section>
 
     <section class="stats" aria-label="Chiffres clés">
       <div class="container stats-grid">
         <div class="stat"><span class="stat-num">7j/7</span><span class="stat-lbl">Disponibilité</span></div>
-        <div class="stat"><span class="stat-num">&lt; 1h</span><span class="stat-lbl">Délai urgence Amiens*</span></div>
+        <div class="stat"><span class="stat-num">&lt; 1h</span><span class="stat-lbl">Objectif urgence Amiens</span></div>
         <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Devis gratuits</span></div>
         <div class="stat"><span class="stat-num">80</span><span class="stat-lbl">Tout le département</span></div>
       </div>
@@ -402,7 +406,7 @@ page("index.html", {
         <div class="gallery">
           <figure class="gallery-item"><img src="assets/sanitaire.jpg" alt="Salle de bain moderne avec lavabo, baignoire et robinetterie" width="800" height="600" loading="lazy" /><figcaption>Sanitaire &amp; salle de bain</figcaption></figure>
           <figure class="gallery-item"><img src="assets/chauffage.jpg" alt="Radiateur de chauffage avec robinet thermostatique" width="800" height="600" loading="lazy" /><figcaption>Chauffage</figcaption></figure>
-          <figure class="gallery-item"><img src="assets/atouts-plombier.jpg" alt="Artisan en intervention équipé de gants de protection" width="900" height="810" loading="lazy" /><figcaption>Dépannage &amp; intervention</figcaption></figure>
+          <figure class="gallery-item"><img src="assets/hero-plombier.jpg" alt="Réseau de tuyauterie d'eau et de gaz" width="900" height="1030" loading="lazy" /><figcaption>Installation &amp; réseaux</figcaption></figure>
         </div>
       </div>
     </section>
@@ -431,7 +435,7 @@ ${ctaBand("Besoin d'un de ces services&nbsp;?", "Décrivez-nous votre besoin : n
 /* ===== URGENCE ===== */
 page("urgence.html", {
   title: `Dépannage plomberie en urgence à Amiens 7j/7 — ${SITE}`,
-  desc: "Urgence plomberie à Amiens et dans la Somme : fuite d'eau, dégât des eaux, canalisation bouchée, panne de chauffage. Intervention rapide 7j/7. Appelez le 06 19 72 90 80.",
+  desc: "Urgence plomberie à Amiens et dans la Somme : fuite d'eau, dégât des eaux, canalisation bouchée, panne de chauffage. Intervention rapide 7j/7. Appelez le 06 32 54 11 38.",
   active: "urgence.html",
   jsonld: [breadcrumb([["Accueil", "index.html"], ["Urgence", "urgence.html"]])],
   body:
@@ -439,6 +443,7 @@ page("urgence.html", {
     `
     <section class="section">
       <div class="container narrow">
+        <figure class="lead-media"><img src="assets/svc-fuite.jpg" alt="Fuite d'eau sur une canalisation à réparer en urgence" width="700" height="470" loading="lazy" /></figure>
         <div class="callout"><strong>Urgence en cours&nbsp;?</strong> Appelez directement le <a href="${TEL_HREF}">${TEL_DISPLAY}</a> — c'est le moyen le plus rapide d'être pris en charge.</div>
         <h2>Quand nous appeler en urgence</h2>
         <ul class="checklist">
@@ -459,7 +464,7 @@ page("urgence.html", {
     <section class="stats" aria-label="Chiffres clés">
       <div class="container stats-grid">
         <div class="stat"><span class="stat-num">7j/7</span><span class="stat-lbl">Soirs &amp; week-ends</span></div>
-        <div class="stat"><span class="stat-num">&lt; 1h</span><span class="stat-lbl">Délai urgence Amiens*</span></div>
+        <div class="stat"><span class="stat-num">&lt; 1h</span><span class="stat-lbl">Objectif urgence Amiens</span></div>
         <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Devis gratuits</span></div>
         <div class="stat"><span class="stat-num">80</span><span class="stat-lbl">Tout le département</span></div>
       </div>
@@ -516,7 +521,7 @@ ${ctaBand("Une autre question&nbsp;?", "Appelez-nous : on répond directement et
 /* ===== CONTACT ===== */
 page("contact.html", {
   title: `Contact & devis gratuit — ${SITE} (Amiens & Somme)`,
-  desc: "Contactez votre plombier à Amiens et dans la Somme. Devis gratuit, intervention 7j/7. Appelez le 06 19 72 90 80 ou envoyez votre demande.",
+  desc: "Contactez votre plombier à Amiens et dans la Somme. Devis gratuit, intervention 7j/7. Appelez le 06 32 54 11 38 ou envoyez votre demande.",
   active: "contact.html",
   jsonld: [breadcrumb([["Accueil", "index.html"], ["Contact", "contact.html"]])],
   body:
@@ -528,18 +533,20 @@ page("contact.html", {
           <h2>Joindre votre plombier</h2>
           <ul class="contact-list">
             <li><span class="ci-ico">${icon("phone")}</span><div><span class="ci-lbl">Téléphone</span><a href="${TEL_HREF}" class="ci-val">${TEL_DISPLAY}</a></div></li>
+            <li><span class="ci-ico">${icon("mail")}</span><div><span class="ci-lbl">E-mail</span><a href="mailto:${EMAIL}" class="ci-val">${EMAIL}</a></div></li>
             <li><span class="ci-ico">${icon("pin")}</span><div><span class="ci-lbl">Secteur</span><span class="ci-val">Amiens &amp; toute la Somme (80)</span></div></li>
             <li><span class="ci-ico">${icon("clock")}</span><div><span class="ci-lbl">Horaires</span><span class="ci-val">7j/7 — urgences soirs &amp; week-ends</span></div></li>
           </ul>
           <a href="${TEL_HREF}" class="btn btn-accent btn-lg">${PHONE_SVG} Appeler le plombier</a>
         </div>
-        <form class="contact-form" action="#" method="post" aria-label="Formulaire de demande de devis" onsubmit="return false;">
+        <form class="contact-form" id="devis-form" data-email="${EMAIL}" aria-label="Formulaire de demande de devis">
           <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" autocomplete="name" required placeholder="Votre nom" /></div>
           <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel" required placeholder="06 00 00 00 00" /></div>
           <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.fr" /></div>
           <div class="field"><label for="message">Votre besoin</label><textarea id="message" name="message" rows="4" required placeholder="Décrivez votre problème (fuite, débouchage, chauffage…)"></textarea></div>
           <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer ma demande</button>
-          <p class="form-note">En urgence, privilégiez l'appel téléphonique pour une prise en charge immédiate.</p>
+          <p class="form-note">Votre messagerie s'ouvre avec la demande pré-remplie. En urgence, appelez le <a href="${TEL_HREF}">${TEL_DISPLAY}</a>.</p>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>`,
@@ -566,7 +573,7 @@ page("mentions-legales.html", {
           <dt>SIRET (siège)</dt><dd>793 539 404 00020</dd>
           <dt>Code APE / NAF</dt><dd>43.22A</dd>
           <dt>Téléphone</dt><dd><a href="${TEL_HREF}">${TEL_DISPLAY}</a></dd>
-          <dt>E-mail</dt><dd class="todo">à compléter</dd>
+          <dt>E-mail</dt><dd><a href="mailto:${EMAIL}">${EMAIL}</a></dd>
           <dt>TVA</dt><dd class="todo">à compléter — le cas échéant, mention « TVA non applicable, art. 293 B du CGI »</dd>
         </dl>
         <h2>Directeur de la publication</h2>
