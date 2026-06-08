@@ -11,6 +11,11 @@ const DOMAIN = "https://www.depannage-plomberie-80.fr";
 const TEL_DISPLAY = "06 19 72 90 80";
 const TEL_HREF = "tel:+33619729080";
 const YEAR = "2026";
+// STAGING=true → site hébergé sur un sous-domaine de test (ex. *.actiofin.com) :
+// NON indexé (meta noindex + robots Disallow). Passer à false pour la mise en prod
+// sur le domaine définitif, puis régénérer (node build.mjs).
+const STAGING = true;
+const ROBOTS = STAGING ? "noindex, nofollow" : "index, follow";
 
 const PHONE_SVG =
   '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>';
@@ -108,7 +113,7 @@ function head({ title, desc, path, jsonld = [] }) {
   <meta name="theme-color" content="#0a3d62" />
   <title>${title}</title>
   <meta name="description" content="${desc}" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="${ROBOTS}" />
   <meta name="author" content="${SITE}" />
   <link rel="canonical" href="${url}" />
   <meta property="og:type" content="website" />
@@ -558,4 +563,10 @@ const sitemap =
   "\n</urlset>\n";
 writeFileSync(new URL("./sitemap.xml", import.meta.url), sitemap, "utf8");
 
-console.log("Généré : " + (PAGES.length) + " pages + sitemap.xml");
+/* ---------- robots.txt (selon STAGING) ---------- */
+const robotsTxt = STAGING
+  ? "# Sous-domaine de test — interdiction totale d'indexation\nUser-agent: *\nDisallow: /\n"
+  : "User-agent: *\nAllow: /\n\nSitemap: " + DOMAIN + "/sitemap.xml\n";
+writeFileSync(new URL("./robots.txt", import.meta.url), robotsTxt, "utf8");
+
+console.log("Généré : " + PAGES.length + " pages + sitemap.xml + robots.txt (" + (STAGING ? "STAGING noindex" : "PROD indexable") + ")");

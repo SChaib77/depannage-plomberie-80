@@ -1,4 +1,3 @@
+# Sous-domaine de test — interdiction totale d'indexation
 User-agent: *
-Allow: /
-
-Sitemap: https://www.depannage-plomberie-80.fr/sitemap.xml
+Disallow: /

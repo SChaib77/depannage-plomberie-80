@@ -13,8 +13,17 @@ fichiers de dev de l'image finale).
 
 À préparer côté Coolify :
 
-- **Domaine temporaire** : sous-domaine à attribuer (ex. `plomberie80.<domaine-coolify>`)
-  ou domaine auto-généré par Coolify.
+- **Sous-domaine de test sur actiofin.com** (non indexé) : ex.
+  `plomberie80.actiofin.com`. Si un wildcard `*.actiofin.com` pointe déjà vers le
+  serveur Coolify, aucun enregistrement DNS supplémentaire n'est nécessaire — il
+  suffit de renseigner le domaine dans Coolify. Sinon, créer un enregistrement
+  DNS (A/CNAME) pour ce sous-domaine vers le serveur Coolify.
+
+> **Non-indexation garantie** : le build est généré en mode `STAGING` (drapeau
+> dans `build.mjs`) → chaque page porte `<meta name="robots" content="noindex,
+> nofollow">` et `robots.txt` interdit tout (`Disallow: /`). Indispensable sur un
+> sous-domaine d'actiofin.com pour ne pas polluer le SEO d'ActioFin. Pour la mise
+> en prod sur le domaine définitif : passer `STAGING = false` puis `node build.mjs`.
 
 ## Procédure Coolify (UI)
 
