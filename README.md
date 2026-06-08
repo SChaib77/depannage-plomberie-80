@@ -7,20 +7,41 @@ secteur **Amiens & Somme (80)**.
 Objectif : attirer une nouvelle clientèle locale et générer des demandes de
 devis / appels (conversion orientée urgence).
 
-## Structure
+## Structure (site multi-pages)
 
 ```
-index.html          Page unique (hero, services, atouts, zones, FAQ, contact)
+build.mjs           Générateur (Node, sans dépendance) — produit les .html ci-dessous
+index.html          Accueil (hero, services, engagements, étapes, stats, CTA)
+services.html       Détail des 6 services
+urgence.html        Page urgence (conversion, 7j/7, que faire)
+zones.html          Zones d'intervention + SEO local Somme
+faq.html            FAQ (JSON-LD FAQPage)
+contact.html        Contact + formulaire de devis
+mentions-legales.html  Mentions légales (LCEN)
 styles.css          Charte graphique mode jour (bleu/aqua + accent orange urgence)
 script.js           Menu mobile + année dynamique
 favicon.svg         Favicon (goutte d'eau + clé)
 site.webmanifest    PWA / icône écran d'accueil
 robots.txt          Indexation autorisée
-sitemap.xml         Plan du site
+sitemap.xml         Plan du site (généré)
 assets/
-  logo.svg          Logo complet (mark + wordmark)
-  logo-mark.svg     Logo icône seule
+  logo.svg / logo-mark.svg          Logos
+  hero-plombier.jpg / atouts-plombier.jpg / og-cover.jpg   Photos locales
 ```
+
+### Régénérer les pages
+
+Le **contenu et le shell partagé** (header, footer, nav, JSON-LD) vivent dans
+`build.mjs`. **Ne pas éditer les `.html` à la main** — modifier `build.mjs`
+puis régénérer :
+
+```
+node build.mjs
+```
+
+Chaque page porte : `<title>`/meta uniques, canonical, Open Graph, JSON-LD
+`Plumber` + `BreadcrumbList` (+ `FAQPage` sur la FAQ), nav avec état actif,
+fil d'Ariane. La sortie reste du HTML pur, déployable sans étape de build.
 
 ## Données réelles (registre public INSEE/INPI)
 
