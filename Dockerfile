@@ -11,5 +11,5 @@ COPY . /usr/share/nginx/html
 RUN rm -f /usr/share/nginx/html/nginx.conf
 
 EXPOSE 80
-# Pas de HEALTHCHECK baké : pour un site 100% statique, nginx running = sain.
-# (Coolify peut configurer un healthcheck HTTP côté UI si souhaité.)
+# Aucune sonde de sante bakee : pour un site 100% statique, nginx en marche = sain.
+# (Une sonde HTTP peut etre configuree cote Coolify si souhaite.)
